@@ -8,6 +8,26 @@ server: shiny
 
 ::: {.panel-tabset}
 
+### Basic quarto operations
+
+## Structured narrative with emphases and proper orthography
+
+I use simple markup to **emphasize** or _focus attention on_ specific words or phrases.
+
+I can add HTML "in line" to achieve <u>underlining</u>.
+
+#### Lower-level heading 1
+
+#### Lower-level heading 2
+
+#### Mathematical annotation with embedded code
+
+We looked at 
+$$
+f(x) = ax^2 + bx + c = 0
+$$
+
+
 ### App
 
 ::: {.panel-sidebar}
