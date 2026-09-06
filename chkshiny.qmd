@@ -3,7 +3,11 @@ title: "My Quarto Shiny Document"
 format: html
 server: shiny
 ---
-  
+
+## App Tabs {.panel-tabset}
+
+### App
+
 ```{r}
 #| panel: sidebar
 helpText("This is a simple app in quarto.")
@@ -14,6 +18,11 @@ sliderInput("obs", "Number of observations:", min = 10, max = 500, value = 100)
 #| panel: fill
 plotOutput("distPlot")
 ```
+
+### About
+
+This tab demonstrates a simple Quarto + Shiny app that draws a histogram from random normal values.
+Use the slider in the **App** tab to change the number of observations.
 
 ```{r}
 #| context: server
