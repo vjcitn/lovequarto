@@ -4,7 +4,9 @@ format: html
 server: shiny
 ---
 
-## App Tabs {.panel-tabset}
+## App Tabs
+
+::: {.panel-tabset}
 
 ### App
 
@@ -25,6 +27,8 @@ plotOutput("distPlot")
 
 This tab demonstrates a simple Quarto + Shiny app that draws a histogram from random normal values.
 Use the slider in the **App** tab to change the number of observations.
+
+:::
 
 ```{r}
 #| context: server
