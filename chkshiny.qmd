@@ -1,0 +1,23 @@
+---
+title: "My Quarto Shiny Document"
+format: html
+server: shiny
+---
+  
+```{r}
+#| panel: sidebar
+helpText("This is a simple app in quarto.")
+sliderInput("obs", "Number of observations:", min = 10, max = 500, value = 100)
+```
+
+```{r}
+#| panel: fill
+plotOutput("distPlot")
+```
+
+```{r}
+#| context: server
+output$distPlot <- renderPlot({
+  hist(rnorm(input$obs))
+})
+```
