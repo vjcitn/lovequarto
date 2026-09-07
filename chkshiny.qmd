@@ -1,18 +1,17 @@
 ---
-title: "My Quarto Shiny Document"
+title: "Vince's Quarto Shiny Document"
 format: html
 server: shiny
 ---
 
 ## App Tabs
 
-::: {.panel-tabset}
-
+::::: panel-tabset
 ### Basic quarto operations
 
 ## Structured narrative with emphases and proper orthography
 
-I use simple markup to **emphasize** or _focus attention on_ specific words or phrases.
+I use simple markup to **emphasize** or *focus attention on* specific words or phrases.
 
 I can add HTML "in line" to achieve <u>underlining</u>.
 
@@ -20,24 +19,70 @@ I can add HTML "in line" to achieve <u>underlining</u>.
 
 #### Lower-level heading 2
 
-#### Mathematical annotation with embedded code
+#### Orthography with markdown
 
-We looked at 
-$$
-f(x) = ax^2 + bx + c = 0
-$$
+`caf&eacute` renders to caf&eacute;,  `Cura&ccedil;ao` renders to Cura&ccedil;ao
 
+#### Orthography with unicode
+
+Specific unicode characters have `\u` as prefix for rendering via inline R.  \\u5f20 and \\uae40 render as:
+
+`r "\u5f20"`, `r "\uae40"`
+
+#### Mathematical annotation with embedded code and graphics
+
+We looked at
+$$f(x) = ax^2 + bx + c = 0$$
+
+We can program the function in R as
+```{r lkf1, echo=TRUE}
+f = function(x, a, b, c) a*x^2 + b*x + c
+```
+and evaluate it:
+```{r lkf2, echo=TRUE}
+f(3, 1, 1, 1)
+```
+Define a domain of evaluation:
+```{r lkf3, echo=TRUE}
+dom = seq(-5, 5, .5)
+```
+Obtain values for specific coefficient settings:
+```{r lkf4, echo=TRUE}
+vals = f(dom, 1, -1, -2)
+```
+Use base R graphics to display:
+```{r lkf5, echo=TRUE}
+plot(dom, vals)
+```
+
+### Interactive viz
+
+Using ggplot2 and plotly, we can support
+tooltips to get information about specific
+point.
+```{r lkf6, echo=TRUE, message=FALSE}
+library(ggplot2)
+library(plotly)
+p1 = ggplot(mapping=aes(x=dom, y=vals)) + geom_point()
+ggplotly(p1)
+```
+### Interactive tables
+
+```{r lktab, echo=TRUE, message=FALSE}
+library(DT)
+datatable(iris)
+```
 
 ### App
 
-::: {.panel-sidebar}
+::: panel-sidebar
 ```{r}
 helpText("This is a simple app in quarto.")
 sliderInput("obs", "Number of observations:", min = 10, max = 500, value = 100)
 ```
 :::
 
-::: {.panel-fill}
+::: panel-fill
 ```{r}
 plotOutput("distPlot")
 ```
@@ -45,10 +90,13 @@ plotOutput("distPlot")
 
 ### About
 
-This tab demonstrates a simple Quarto + Shiny app that draws a histogram from random normal values.
-Use the slider in the **App** tab to change the number of observations.
+This quarto document demonstrates 
 
-:::
+- literate programming, with code narrated and executed
+- interactive visualization of data with plotly
+- interactive table display with DT
+- a simple Quarto + Shiny app that draws a histogram from random normal values. 
+:::::
 
 ```{r}
 #| context: server
@@ -56,4 +104,3 @@ output$distPlot <- renderPlot({
   hist(rnorm(input$obs))
 })
 ```
-
